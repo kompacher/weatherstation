@@ -1,7 +1,10 @@
 package com.senacor.oo.wheatherstation.product;
 
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.senacor.oo.wheatherstation.sensor.Sensor;
 
 import org.springframework.hateoas.ResourceSupport;
@@ -11,13 +14,23 @@ import org.springframework.hateoas.ResourceSupport;
  */
 public abstract class Weatherstation extends ResourceSupport {
 
-    public abstract Collection<Sensor> getSensors();
+    private Map<String, Sensor> sensors = new HashMap<String, Sensor>();
+    @JsonIgnore
+    public Collection<String> getSensorTypes() {
+        return sensors.keySet();
+    }
+    @JsonIgnore
+    public Collection<Sensor> getSensors() {
+        return sensors.values();
+    }
 
-    public abstract Sensor getSensor(Long id);
+    public abstract String getName();
 
-    abstract void reset();
+    public Sensor getSensor(String type) {
+        return sensors.get(type);
+    }
 
-    abstract String getStatus();
-
-    abstract String getInfo();
+    protected void addSensor(String type, Sensor sensor) {
+        sensors.put(type, sensor);
+    }
 }

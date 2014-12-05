@@ -3,17 +3,13 @@ package com.senacor.oo.wheatherstation.sensor;
 /**
  * @author Georg Kompacher, Senacor Technologies AG
  */
-public class Temperature implements Sensor {
+public class Temperature extends Sensor {
 
-    private Long id = 3L;
-
-    @Override
-    public Long getId() {
-        return id;
+    public TemperatureUnit getUnit() {
+        return TemperatureUnit.CELSIUS;
     }
 
-    @Override
     public String getValue() {
-        return "22.2";
+        return "32.29";
     }
 }
