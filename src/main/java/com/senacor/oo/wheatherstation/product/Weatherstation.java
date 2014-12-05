@@ -30,6 +30,10 @@ public abstract class Weatherstation extends ResourceSupport {
         return sensors.get(type);
     }
 
+    public boolean hasSensorOfType(String type) {
+        return sensors.containsKey(type);
+    }
+
     protected void addSensor(String type, Sensor sensor) {
         sensors.put(type, sensor);
     }

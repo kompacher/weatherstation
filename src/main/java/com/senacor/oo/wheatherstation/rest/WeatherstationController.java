@@ -1,6 +1,7 @@
 package com.senacor.oo.wheatherstation.rest;
 
 import com.senacor.oo.wheatherstation.WeatherStationResourceBuilder;
+import com.senacor.oo.wheatherstation.exception.ResourceNotFoundException;
 import com.senacor.oo.wheatherstation.product.WeatherstationGold;
 import com.senacor.oo.wheatherstation.product.WeatherstationWhite;
 import com.senacor.oo.wheatherstation.sensor.Sensor;
@@ -28,6 +29,10 @@ public class WeatherstationController {
 
     @RequestMapping("/{stationType}/sensors/{sensorType}")
     public Sensor getSensor(@PathVariable String stationType, @PathVariable String sensorType) {
-        return weatherStationResourceBuilder.getSensor(StationType.fromStringValue(stationType), sensorType);
+        Sensor sensor = weatherStationResourceBuilder.getSensor(StationType.fromStringValue(stationType), sensorType);
+        if (sensor == null) {
+            throw new ResourceNotFoundException();
+        }
+        return sensor;
     }
 }

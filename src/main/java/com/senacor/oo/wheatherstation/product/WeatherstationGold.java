@@ -22,7 +22,7 @@ public class WeatherstationGold extends Weatherstation {
         addSensor("temperature", new Temperature());
         addSensor("humidity", new Humidity());
         addSensor("time", new Time());
-        addSensor("temperatureTerrace", new Temperature());
+        addSensor("temperature2", new Temperature());
         addSensor("forecast", new Forecast());
     }
 }

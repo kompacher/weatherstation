@@ -34,4 +34,11 @@ public class MvcTest {
                 .andExpect(jsonPath("$.name").value("WS-Gold"))
                 .andExpect(status().isOk());
     }
+
+    @Test
+    public void getForecastForWeatherStationWhite() throws Exception {
+        mockMvc.perform(get("/white/sensors/forecast"))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(status().is4xxClientError());
+    }
 }

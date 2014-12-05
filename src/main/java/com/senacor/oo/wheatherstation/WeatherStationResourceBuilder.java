@@ -42,6 +42,9 @@ public class WeatherStationResourceBuilder {
 
     public Sensor getSensor(StationType stationType, String sensorType) {
         Weatherstation weatherstation = getWeatherstation(stationType);
+        if (!weatherstation.hasSensorOfType(sensorType)) {
+            return null;
+        }
         Sensor sensor = weatherstation.getSensor(sensorType);
         sensor.add(linkTo(methodOn(WeatherstationController.class).getSensor(stationType.toStringValue(), sensorType)).withSelfRel());
         return sensor;
